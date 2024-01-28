@@ -1,25 +1,37 @@
 import React from 'react'
+import { useState } from 'react'
+
 import "./NewGoal.css"
 
-export default function NewGoal({ newaddinggoal }) {
+export default function NewGoal({ onAdding }) {
 
-    const addGoalHandler = (event) => {
-        event.preventdefault()
+    const [entertext, setentertext] = useState("");
 
-        const newGoal = {
+
+    const addGoalHandler = event => {
+        event.preventDefault();
+
+        const Musab = {
             id: Math.random().toString(),
-            text : "My adding the goal"
+            text: entertext
         }
 
-        console.log(newGoal);
+        setentertext("")
+
+        onAdding(Musab);
 
 
     }
+    
+    const Handlingtext = (e) => {
+       setentertext(e.target.value)
+    }
 
     return (
-        <form className='forms' onSubmit={addGoalHandler}>
-            <input type="text" />
-            <button>Submit</button>
+      
+        <form className='form'onSubmit = {addGoalHandler}>
+            <input type="text" className='input-bar' placeholder='Enter text ...' value={entertext} onChange = {Handlingtext} />
+            <button className='button'>Submit</button>
         </form>
-    )
+  )
 }

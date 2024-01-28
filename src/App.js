@@ -1,33 +1,43 @@
 import React from 'react';
+import { useState } from 'react';
 import "./App.css"
-import AddGoal from "./components/NewGoal/NewGoal.jsx"
 import GoalList from './components/GoalList/GoalList';
+import NewGoal from './components/NewGoal/NewGoal';
 
 const App = () => {
 
-  const List = [
+  const [List, setList] = useState([
     {
       id: "gl1",
-      text: "ANytingh",
+      text: "Components ",
     },
     {
       id: "gl2",
-      text: "ANytingh",
+      text: "Props ",
     },
     {
       id: "gl3",
-      text: "ANytingh",
+      text: "State",
+    },
+     {
+      id: "gl4",
+      text: "JSX",
     }
-  ]
+  ])
 
-  const addGoalHandler = (newGoal) => {
-    List.push(newGoal);
-    console.log(List);
-  }
+  const addNewGoalHandler = (Musab) => {
+    // setList(List.concat(Musab)); Works but not the best way. 
+    setList((prevList) => {
+      return prevList.concat(Musab) 
+    })
+    // Always update the correct state  and works doesn't lag to get any fresh update. 
+  };
+
 
   return <div className='main'>
-    <h1 className='head'>let's gooo</h1>
-    <AddGoal newaddinggoal={addGoalHandler} />
+    <h1 className='head'>ReactJS All Important!!</h1>
+    <NewGoal onAdding={addNewGoalHandler} />
+
     <GoalList goal={List}></GoalList>
   </div>;
 };
